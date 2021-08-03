@@ -2,6 +2,7 @@ import enumerator.Builder;
 import enumerator.Type;
 import enumerator.Wood;
 import model.Guitar;
+import model.GuitarSpec;
 import model.Inventory;
 
 import java.util.List;
@@ -13,18 +14,19 @@ public class FindGuitarTester {
         Inventory inventory = new Inventory();
         initializeInventory(inventory);
 
-        Guitar whatErinLikes = new Guitar("", Builder.FENDER, "Stratocastor",
-                Type.ELECTRIC, Wood.ALDER, Wood.ALDER, 0);
+        GuitarSpec whatErinLikes = new GuitarSpec(Builder.FENDER, "Stratocastor",
+                Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
         List matchingGuitars = inventory.search(whatErinLikes);
 
         if (!matchingGuitars.isEmpty()) {
             System.out.println("Erin, you might like these guitars:");
             for (Object matchingGuitar : matchingGuitars) {
                 Guitar guitar = (Guitar) matchingGuitar;
-                System.out.println("  We have a " + guitar.getBuilder() + " " +
-                        guitar.getModel() + " " + guitar.getType() + " guitar:\n    " +
-                        guitar.getBackWood() + " back and sides,\n    " +
-                        guitar.getTopWood() + " top.\n  You can have it for only $" +
+                GuitarSpec spec = guitar.getSpec();
+                System.out.println("  We have a " + spec.getBuilder() + " " +
+                        spec.getModel() + " " + spec.getType() + " guitar:\n    " +
+                        spec.getBackWood() + " back and sides,\n    " +
+                        spec.getTopWood() + " top.\n  You can have it for only $" +
                         guitar.getPrice() + "!\n  ----");
             }
         } else {
@@ -35,11 +37,11 @@ public class FindGuitarTester {
 
     private static void initializeInventory(Inventory inventory) {
         // Add guitars to the inventory...
-        inventory.addGuitar("V95693", 1499.95, Builder.FENDER,
-                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        GuitarSpec spec = new GuitarSpec(Builder.FENDER, "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        inventory.addGuitar("V95693", 1499.95, spec);
 
-        inventory.addGuitar("V9512", 1549.95, Builder.FENDER,
-                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        GuitarSpec spec2 = new GuitarSpec(Builder.FENDER, "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        inventory.addGuitar("V9512", 1549.95, spec2);
     }
 
 }
