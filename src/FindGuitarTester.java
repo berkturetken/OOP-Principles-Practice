@@ -1,11 +1,18 @@
+import enumerator.Builder;
+import enumerator.Type;
+import enumerator.Wood;
+import model.Guitar;
+import model.Inventory;
+
 public class FindGuitarTester {
 
     public static void main(String[] args) {
-        // Set up Ricks's guitar Inventory
+        // Set up Ricks's guitar inventory
         Inventory inventory = new Inventory();
         initializeInventory(inventory);
 
-        Guitar whatErinLikes = new Guitar("", "fender", "Stratocastor", "electric", "Alder", "Alder", 0);
+        Guitar whatErinLikes = new Guitar("", Builder.FENDER, "Stratocastor",
+                Type.ELECTRIC, Wood.ALDER, Wood.ALDER, 0);
         Guitar guitar = inventory.search(whatErinLikes);
 
         if (guitar != null) {
@@ -23,6 +30,8 @@ public class FindGuitarTester {
 
     private static void initializeInventory(Inventory inventory) {
         // Add guitars to the inventory...
+        inventory.addGuitar("V95693", 1499.95, Builder.FENDER,
+                "Stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
     }
 
 }
